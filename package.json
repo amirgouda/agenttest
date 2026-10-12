@@ -1,0 +1,40 @@
+{
+  "name": "ordoor-agent-test",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI testing agent that plays Ordoor customers (personas \u00d7 scenarios) over Ordoor's WhatsApp simulator API.",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n server,web -c blue,green \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:web": "vite",
+    "build": "vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:export-data": "tsx server/scripts/export-data-migration.ts",
+    "db:migrate": "tsx -e \"import('./server/db.ts').then(async ({ db, migrate }) => { console.log('applied:', await migrate(db())); await db().close() })\""
+  },
+  "dependencies": {
+    "dotenv": "16.6.1",
+    "express": "4.21.2",
+    "pg": "8.13.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsx": "4.19.2",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.2.15",
+    "@types/express": "4.17.21",
+    "@types/node": "22.10.2",
+    "@types/pg": "8.11.10",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "4.3.4",
+    "concurrently": "9.1.2",
+    "typescript": "5.7.2",
+    "vite": "5.4.11",
+    "vitest": "2.1.8"
+  }
+}
