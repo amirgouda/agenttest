@@ -197,7 +197,9 @@ export function RunDetail({ id }: { id: string }) {
 
 function Chat({ entries, mine, live }: { entries: TranscriptEntry[]; mine: TranscriptEntry['side']; live: boolean }) {
   const end = useRef<HTMLDivElement>(null)
-  useEffect(() => end.current?.scrollIntoView({ block: 'nearest' }), [entries.length])
+  useEffect(() => {
+    end.current?.scrollIntoView({ block: 'nearest' })
+  }, [entries.length])
   return (
     <div className="chat">
       {entries.length === 0 && <div className="muted center small">No messages yet.</div>}
